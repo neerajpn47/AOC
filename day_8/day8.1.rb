@@ -8,10 +8,8 @@ file.each_line do |line|
   all_characters += newline.length    
   next if newline.empty?  
  
-  next_line =  newline[1..-2]
-  escape_seq_1 = next_line.gsub(/(\\x..)|(\\\\)/,'_') 
-  escape_seq_2 = escape_seq_1.gsub(/(\\")/,'_')
-  valid_characters += escape_seq_2.length 
+  escape_seq = newline[1..-2].gsub(/(\\x..)|(\\")|(\\\\)/,'_') 
+  valid_characters += escape_seq.length 
  
 end
 
