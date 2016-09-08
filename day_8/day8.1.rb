@@ -1,16 +1,17 @@
 filename = ARGV[0].strip
-all_characters, valid_characters  = 0, 0
+all_characters_count = 0
+valid_characters_count = 0
 
 file = File.read(filename)
-file.each_line do |line|
-  
+file.each_line do |line| 
   newline = line.strip
-  all_characters += newline.length    
   next if newline.empty?  
  
-  escape_seq = newline[1..-2].gsub(/(\\x..)|(\\")|(\\\\)/,'_') 
-  valid_characters += escape_seq.length 
- 
+  all_characters_count += newline.length
+  valid_strings = newline[1..-2] 
+  escape_seq = valid_strings.gsub(/(\\x..)|(\\")|(\\\\)/,'_') 
+  valid_characters_count += escape_seq.length 
 end
 
-p all_characters - valid_characters
+difference =  all_characters_count - valid_characters_count
+puts difference
